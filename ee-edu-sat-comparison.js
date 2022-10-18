@@ -38,7 +38,8 @@ ui.root.add(split_panel);
 // --------------------------------------
 
 var config = {
-  title: 'MODIS Terra, Landsat 8, and Sentinel 2',
+  title: 'Satellite comparison',
+  subtitle: 'Sentinel 2, Landsat 8, MODIS Terra',
   urlTitle: '',
   S2: ee.ImageCollection('COPERNICUS/S2_SR'),
   L8: ee.ImageCollection('LANDSAT/LC08/C02/T1_L2'),
@@ -129,7 +130,7 @@ var styles = {
     fontWeight: 'bold'
     },
   subTitle: {
-    fontSize: '14px',
+    fontSize: '18px',
     // color: '#478EC9',
     whiteSpace: 'pre'
     // backgroundColor: background
@@ -293,7 +294,16 @@ var centerButton = ui.Button(
 var title = ui.Label( {
   value: config.title,
   style: styles.title,
-  targetUrl: config.urlTitle,
+  // targetUrl: config.urlTitle,
+  // imageUrl:  {}
+  }
+)
+;
+
+var subtitle = ui.Label( {
+  value: config.subtitle,
+  style: styles.subTitle,
+  // targetUrl: config.urlTitle,
   // imageUrl:  {}
   }
 )
@@ -350,6 +360,7 @@ credits_panel
 // --------------------------------------
 
 panel.add(title)
+  .add(subtitle)
   .add(time_panel)
   .add(centerButton)
   .add(credits_panel)
