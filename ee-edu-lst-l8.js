@@ -48,7 +48,7 @@ var time_panel = ui.Panel(
   {
     style:
     {
-      width: '80%',
+      width: '100%',
       shown: true
     }
   }
@@ -164,6 +164,8 @@ var config = {
   endDate: '2019-09-01',
   y_max: 150000,
   y_value: 150000,
+  cloud_max: 50,
+  cloud_value: 10,
   pixel_scale: 90,
   // buffer: 100,
   hist: '',
@@ -194,7 +196,7 @@ var updateImage = function() {
       config.endDate,           // end date
       config.poi         // poi to filter collection
       )
-    .filter(ee.Filter.lt('CLOUD_COVER', 10))
+    .filter(ee.Filter.lt('CLOUD_COVER', config.cloud_value))
     ;
 };
 
@@ -252,7 +254,6 @@ var updateMap = function() {
 // time windows
 // --------------------------------------
 
-
 var changeStart = function(text) {
   config.startDate = String(text);
   refresh();
@@ -279,14 +280,58 @@ start_end_panel
 
 var today = new Date().toISOString().slice(0, 10);
 
+// Cloud filter slider
+
+// -------------------------------------
+// cloud mask
+// -------------------------------------
+
+var cloud_filter_label = ui.Label(
+    {
+    value: 'Set max percent cloudy.',
+    style: styles.instruction
+    }
+  );
+
+var cloud_filter_slider = ui.Slider({
+  min: 0,
+  max: config.cloud_max,
+  value: config.cloud_value,
+  step: 5,
+  style:
+    {width: '50%'},
+  onChange: function(value) {
+    config.cloud_value = value;
+    refresh();
+  }
+});
+
+var cloud_filter_panel = ui.Panel(
+  {
+    layout: ui.Panel.Layout.flow('horizontal'),
+    widgets: [
+      cloud_filter_label,
+      cloud_filter_slider],
+    style:
+    {
+      width: '95%',
+      shown: true
+    }
+  }
+)
+;
+
+// Configure time panel.
+
 time_panel
   .add(makeInstructions(
     'TO CHANGE DATES:\n\nSelect a new start and end date.\nDates must be between 2019-01-01 and ' + today,
     styles.instruction))
   .add(start_end_panel)
   .add(makeInstructions(
-    'If the layer panel appears red while drawing,\nthen please try to widen your time window and\nclick the map to redraw map and histogram.',
+    'If the layer panel appears red while drawing,\nthen please try to widen your time window (above)\nor increase the allowable percent of cloud cover (below).',
      styles.instruction))
+  .add(cloud_filter_panel)
 ;
 
 
@@ -408,6 +453,8 @@ var y_max_panel = ui.Panel(
 ;
 
 
+
+
 // --------------------------------------
 // histogram
 // --------------------------------------
@@ -452,7 +499,6 @@ var legend_panel = ui.Panel(
   }
 )
 ;
-
 
 // Function to update legend
 
@@ -531,7 +577,7 @@ credits_panel
   .add(makeLabel(
     'Code for this app',
     styles.credits,
-    'https://github.com/jeffhowarth/ee-edu-apps'
+    'https://github.com/jeffhowarth/ee-edu-apps/blob/main/ee-edu-lst-l8.js'
     )
   )
 ;
