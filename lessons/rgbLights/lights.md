@@ -16,6 +16,8 @@ If you are new to reading additive color, the picture below illustrates how colo
 
 ![RGB key](images/RGB_alt3.png)  
 
+Alternatively, you can also use this [RGB app](https://jhowarth.users.earthengine.app/view/ee-edu-rgb) to interpret the colors displayed on the image.
+
 ## Heat pattern  
 
 The picture of Shanghai, China shows a recurring pattern that resembles heat from a fire: white core, yellow periphery, red terminal edge.  
