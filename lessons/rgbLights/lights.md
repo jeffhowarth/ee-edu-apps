@@ -1,16 +1,10 @@
-## RGB of stable nighttime lights (1993 - 2013)  
+# Changes in the night   
 
-[_Dataset source_](https://developers.google.com/earth-engine/datasets/catalog/NOAA_DMSP-OLS_CALIBRATED_LIGHTS_V4?hl=en)
-
-[_Earth Engine script_](rgbLights.js)  
-
-
-
-This image uses additive color to compare brightness of stable nighttime lights in 2013, 2003, 1993.  
+This [image](https://jhowarth.users.earthengine.app/view/rgb-nighttime-lights) uses additive color to compare brightness of stable nighttime lights in 2013, 2003, 1993 from this [dataset](https://developers.google.com/earth-engine/datasets/catalog/NOAA_DMSP-OLS_CALIBRATED_LIGHTS_V4?hl=en).  
 
 - Red channel = 2013  
 - Green channel = 2003  
-- Blue channel = 1993     
+- Blue channel = 1993    
 
 If you are new to reading additive color, the picture below illustrates how colors represent combinations of pixel values.
 
